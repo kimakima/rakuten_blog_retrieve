@@ -36,8 +36,12 @@ for st_link_image in soup.find(attrs={"class":"dText break-word"}).findAll("img"
 	print "link to image\t:" + st_link_image['src']
 
 # link to past content
-for st_past_link in soup.findAll(attrs={"class":"main_title"}):
-	if "過去" in str(st_past_link):
-		st_past_link = url_base + st_past_link.find("a",href=True)['href']
-print "link to past content\t:" + st_past_link
+def get_past_link(soup):
+	for st_past_link in soup.findAll(attrs={"class":"main_title"}):
+		if "過去" in str(st_past_link):
+			st_past_link = url_base + st_past_link.find("a",href=True)['href']
+	return str(st_past_link)
+
+print "link to past content\t:" + get_past_link(soup)
+
 
