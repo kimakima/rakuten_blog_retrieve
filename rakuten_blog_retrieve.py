@@ -23,17 +23,17 @@ opener = urllib2.build_opener()
 soup = BeautifulSoup.BeautifulSoup(urllib2.urlopen(url_origin).read())
 
 # title
-print str(soup.find("h2").find("a").string)
+def get_title(soup):
+	return str(soup.find("h2").find("a").string)
 
 # datetime
-print str(soup.find("div",align="right")).rsplit("\n")[2].strip()
-	
-# content & strip html tags
-for st_contents in soup.findAll(attrs={"class":"dText break-word"}):
-	print re.sub(r'<br />',"",str(st_contents))
+def get_datetime(soup):
+	return str(soup.find("div",align="right")).rsplit("\n")[2].strip()
 
-for st_link_image in soup.find(attrs={"class":"dText break-word"}).findAll("img",src=True):
-	print "link to image\t:" + st_link_image['src']
+# content & strip html tags
+def get_content(soup):
+	for st_contents in soup.findAll(attrs={"class":"dText break-word"}):
+		return re.sub(r'<br />',"",str(st_contents))
 
 # link to past content
 def get_past_link(soup):
@@ -42,6 +42,12 @@ def get_past_link(soup):
 			st_past_link = url_base + st_past_link.find("a",href=True)['href']
 	return str(st_past_link)
 
-print "link to past content\t:" + get_past_link(soup)
+print "title\t:" + get_title(soup)
+print "datetime\t:" + get_datetime(soup)
+print "content\t:\n" + get_content(soup)
 
+for st_link_image in soup.find(attrs={"class":"dText break-word"}).findAll("img",src=True):
+	print "link to image\t:" + st_link_image['src']
+
+print "link to past content\t:" + get_past_link(soup)
 
