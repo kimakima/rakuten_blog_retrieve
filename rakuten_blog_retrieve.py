@@ -37,17 +37,19 @@ def get_content(soup):
 
 # link to past content
 def get_past_link(soup):
-	for st_past_link in soup.findAll(attrs={"class":"main_title"}):
-		if "過去" in str(st_past_link):
-			st_past_link = url_base + st_past_link.find("a",href=True)['href']
-	return str(st_past_link)
+	return = str(soup.find("li",{"class":"sideNext"}).find("a",href=True)['href'])
+
+# link to images
+def get_link_image(soup):
+	image_links=[]
+	for st_link_image in soup.find(attrs={"class":"dText break-word"}).findAll("img",src=True):
+		image_links.append(st_link_image['src'])
+		print st_link_image['src']
+	return image_links
 
 print "title\t:" + get_title(soup)
 print "datetime\t:" + get_datetime(soup)
 print "content\t:\n" + get_content(soup)
-
-for st_link_image in soup.find(attrs={"class":"dText break-word"}).findAll("img",src=True):
-	print "link to image\t:" + st_link_image['src']
-
+for i in get_link_image(soup):
+	print "link to images\t:" + i
 print "link to past content\t:" + get_past_link(soup)
-
