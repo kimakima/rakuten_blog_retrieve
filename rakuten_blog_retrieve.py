@@ -4,7 +4,7 @@ import BeautifulSoup
 import urllib2
 import re
 
-url_base = "http://plaza.rakuten.co.jp/"
+url_base = "http://plaza.rakuten.co.jp"
 
 ini_file = open('rakuten_blog_retrieve.ini','r')
 for line in ini_file:
