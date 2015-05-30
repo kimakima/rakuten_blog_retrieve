@@ -16,7 +16,7 @@ argvs = sys.argv
 if len(argvs) == 2:
 	st_past_link = url_base + argvs[1]
 else:
-	st_past_link = url_base  + url_blog
+	st_past_link = url_base + url_blog
 	
 print st_past_link
 
@@ -50,6 +50,7 @@ loop_flg = True
 while loop_flg == True:
 	soup = BeautifulSoup.BeautifulSoup(urllib2.urlopen(st_past_link).read())
 
+	print "----------"
 	print "title\t:" + get_title(soup)
 	print "datetime\t:" + get_datetime(soup)
 	print "content\t:\n" + get_content(soup)
