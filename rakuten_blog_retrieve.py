@@ -14,11 +14,11 @@ print url_blog
 
 argvs = sys.argv
 if len(argvs) == 2:
-	st_past_link = BASE_URL + argvs[1]
+	st_link = BASE_URL + argvs[1]
 else:
-	st_past_link = BASE_URL + url_blog
+	st_link = BASE_URL + url_blog
 	
-print st_past_link
+print st_link
 
 # title
 def get_title(soup):
@@ -48,7 +48,7 @@ def get_link_image(soup):
 opener = urllib2.build_opener()
 loop_flg = True
 while loop_flg == True:
-	soup = BeautifulSoup.BeautifulSoup(urllib2.urlopen(st_past_link).read())
+	soup = BeautifulSoup.BeautifulSoup(urllib2.urlopen(st_link).read())
 
 	print "----------"
 	print "title\t:" + get_title(soup)
@@ -56,11 +56,11 @@ while loop_flg == True:
 	print "content\t:\n" + get_content(soup)
 	for i in get_link_image(soup):
 		print "link to images\t:" + i
-	st_past_link = get_past_link(soup)
+	st_link = get_past_link(soup)
 
-	if(len(st_past_link) == 0):
+	if(len(st_link) == 0):
 		loop_flg = False
 	else:
-		st_past_link = BASE_URL + re.sub("^/","",st_past_link)
+		st_link = BASE_URL + re.sub("^/","",st_link)
 
-	print "link to past content\t:" + st_past_link
+	print "link to past content\t:" + st_link
