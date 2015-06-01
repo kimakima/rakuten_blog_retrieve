@@ -8,15 +8,15 @@ BASE_URL = "http://plaza.rakuten.co.jp/"
 
 ini_file = open('./rakuten_blog_retrieve.ini','r')
 for line in ini_file:
-	url_blog = line
+	target_url = line
 ini_file.close()
-print url_blog
+print target_url
 
 argvs = sys.argv
 if len(argvs) == 2:
 	st_link = BASE_URL + argvs[1]
 else:
-	st_link = BASE_URL + url_blog
+	st_link = BASE_URL + target_url
 	
 print st_link
 
