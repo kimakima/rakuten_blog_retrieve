@@ -1,10 +1,10 @@
-#coding:utf-8
+coding:utf-8
 import sys
 import BeautifulSoup
 import urllib2
 import re
 
-url_base = "http://plaza.rakuten.co.jp/"
+BASE_URL = "http://plaza.rakuten.co.jp/"
 
 ini_file = open('./rakuten_blog_retrieve.ini','r')
 for line in ini_file:
@@ -14,9 +14,9 @@ print url_blog
 
 argvs = sys.argv
 if len(argvs) == 2:
-	st_past_link = url_base + argvs[1]
+	st_past_link = BASE_URL + argvs[1]
 else:
-	st_past_link = url_base + url_blog
+	st_past_link = BASE_URL + url_blog
 	
 print st_past_link
 
@@ -61,6 +61,6 @@ while loop_flg == True:
 	if(len(st_past_link) == 0):
 		loop_flg = False
 	else:
-		st_past_link = url_base + re.sub("^/","",st_past_link)
+		st_past_link = BASE_URL + re.sub("^/","",st_past_link)
 
 	print "link to past content\t:" + st_past_link
