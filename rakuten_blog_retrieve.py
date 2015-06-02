@@ -1,4 +1,4 @@
-coding:utf-8
+#coding:utf-8
 import sys
 import BeautifulSoup
 import urllib2
@@ -31,7 +31,11 @@ def get_datetime(soup):
 # content & strip html tags
 def get_content(soup):
 	for st_contents in soup.findAll(attrs={"class":"dText break-word"}):
-		return re.sub(r'<br />',"",str(st_contents))
+		st_contents = str(st_contents)
+		st_contents = re.sub(r'<div class=\"dText break-word\">',"",st_contents)
+		st_contents = re.sub(r'</div>',"",st_contents)
+		st_contents = re.sub(r'\r\n','\n',st_contents)
+		return re.sub(r'<br />',"",st_contents)
 
 # link to past content
 def get_past_link(soup):
@@ -41,8 +45,9 @@ def get_past_link(soup):
 def get_link_image(soup):
 	image_links=[]
 	for st_link_image in soup.find(attrs={"class":"dText break-word"}).findAll("img",src=True):
-		image_links.append(st_link_image['src'])
-		print st_link_image['src']
+		if "http://image.space.rakuten.co.jp" in st_link_image['src']:
+			image_links.append(st_link_image['src'])
+#		print st_link_image['src']
 	return image_links
 
 opener = urllib2.build_opener()
