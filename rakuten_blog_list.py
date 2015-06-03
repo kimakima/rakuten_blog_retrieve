@@ -19,6 +19,11 @@ for st_block in soup.find_all('li',class_="loListItem"):
 		print st_title.string
 	for st_link in st_block.find_all('a'):
 		print st_link.get('href')
+
+for st_pager_area in soup.find_all('p',class_="pagerArea"):
+	for st_pager in st_pager_area.find_all('a'):
+		print st_pager.get('href')
+
 #	st_title = st_link.find_all('h2',lass_="diary_title")
 
 #for st_title in soup.find_all('h2',class_="loListTtl diary_title"):
