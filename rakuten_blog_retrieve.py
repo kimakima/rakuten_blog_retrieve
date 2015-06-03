@@ -5,6 +5,7 @@ import urllib2
 import re
 
 BASE_URL = "http://plaza.rakuten.co.jp/"
+IMAGE_URL = "http://image.space.rakuten.co.jp"
 
 ini_file = open('./rakuten_blog_retrieve.ini','r')
 for line in ini_file:
@@ -45,7 +46,7 @@ def get_past_link(soup):
 def get_link_image(soup):
 	image_links=[]
 	for st_link_image in soup.find(attrs={"class":"dText break-word"}).findAll("img",src=True):
-		if "http://image.space.rakuten.co.jp" in st_link_image['src']:
+		if IMAGE_URL in st_link_image['src']:
 			image_links.append(st_link_image['src'])
 #		print st_link_image['src']
 	return image_links
