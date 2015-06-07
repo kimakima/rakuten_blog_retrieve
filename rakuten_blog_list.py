@@ -20,6 +20,7 @@ def get_pagers(st_link):
 		for st_pager in st_pager_area.find_all('a'):
 			li_pagers.append(str(st_pager.get('href')))
 	li_pagers = list(set(li_pagers))
+	li_pagers.insert(0, st_link)
 	return li_pagers
 
 def get_titles(st_link):
@@ -37,7 +38,6 @@ def get_titles(st_link):
 
 li_pagers = get_pagers(st_link)
 # ベースのURLからPagerのListを取得してから、Listの先頭にベースのURLを追加することで、完全なPagerのListになる。
-li_pagers.insert(0, st_link)
 
 while len(li_pagers):
 	li_contents = get_titles(li_pagers.pop(0))
