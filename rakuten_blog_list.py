@@ -45,6 +45,8 @@ class BlogList:
 				li_data.append(st_title.string)
 			for st_link in st_block.find_all('a'):
 				li_data.append(st_link.get('href'))
+			for st_date in st_block.find_all('p',class_="loListTs"):
+				li_data.append(st_date.string)
 			li_contents.append(li_data)
 		return li_contents
 
@@ -56,5 +58,5 @@ while st_link:
 	li_contents = blog_list.get_contents_data(st_link)
 
 	for i in li_contents:
-		print i[0].encode('utf-8') + "\t" + i[1].encode('utf-8')
+		print i[0].encode('utf-8') + "\t" + i[1].encode('utf-8') + "\t" + i[2].encode('utf-8')
 	st_link = blog_list.pop_pager_link()
