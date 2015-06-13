@@ -7,7 +7,11 @@ import re
 #BASE_URL = "http://plaza.rakuten.co.jp/"
 #IMAGE_URL = "http://image.space.rakuten.co.jp"
 
-RAKUTEN_BLOG_NAME = "kimakimach"
+argvs = sys.argv
+if len(argvs) == 2:
+	RAKUTEN_BLOG_NAME = argvs[1]
+else:
+	sys.exit()
 
 class BlogList:
 	def __init__(self,RAKUTEN_BLOG_NAME):
