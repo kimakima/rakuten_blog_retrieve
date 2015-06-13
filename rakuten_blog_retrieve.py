@@ -7,20 +7,19 @@ import re
 BASE_URL = "http://plaza.rakuten.co.jp/"
 IMAGE_URL = "http://image.space.rakuten.co.jp"
 
-ini_file = open('./rakuten_blog_retrieve.ini','r')
-for line in ini_file:
-	target_url = line
-ini_file.close()
-print target_url
-
 argvs = sys.argv
 if len(argvs) == 2:
-	st_link = BASE_URL + argvs[1]
+	st_link_filename = argvs[1]
 else:
-	st_link = BASE_URL + target_url
-	
-print st_link
+	sys.exit()
 
+target_url = []
+fh_link = open(st_link_filename,'r')
+for line in fh_link:
+	target_url.append(line.rstrip().split('\t')[1])
+fh_link.close()
+print str(target_url)
+	
 # title
 def get_title(soup):
 	return str(soup.find("h2").find("a").string)
@@ -53,7 +52,7 @@ def get_link_image(soup):
 
 opener = urllib2.build_opener()
 loop_flg = True
-while loop_flg == True:
+while loop_flg == False:
 	soup = BeautifulSoup.BeautifulSoup(urllib2.urlopen(st_link).read())
 
 	print "----------"
