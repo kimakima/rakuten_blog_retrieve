@@ -52,20 +52,19 @@ def get_link_image(soup):
 
 opener = urllib2.build_opener()
 loop_flg = True
-while loop_flg == False:
-	soup = BeautifulSoup.BeautifulSoup(urllib2.urlopen(st_link).read())
+while loop_flg == True:
+	try:
+		soup = BeautifulSoup.BeautifulSoup(urllib2.urlopen(target_url.pop(0)).read())
 
-	print "----------"
-	print "title\t:" + get_title(soup)
-	print "datetime\t:" + get_datetime(soup)
-	print "content\t:\n" + get_content(soup)
-	for i in get_link_image(soup):
-		print "link to images\t:" + i
-	st_link = get_past_link(soup)
+		print "----------"
+		print "title\t:" + get_title(soup)
+		print "datetime\t:" + get_datetime(soup)
+		print "content\t:\n" + get_content(soup)
+		for i in get_link_image(soup):
+			print "link to images\t:" + i
+		st_link = get_past_link(soup)
 
-	if(len(st_link) == 0):
-		loop_flg = False
-	else:
-		st_link = BASE_URL + re.sub("^/","",st_link)
-
-	print "link to past content\t:" + st_link
+		print "link to past content\t:" + st_link
+	except:
+		print "except..."
+		sys.exit()
