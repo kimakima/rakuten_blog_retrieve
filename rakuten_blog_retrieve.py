@@ -51,8 +51,7 @@ def get_link_image(soup):
 	return image_links
 
 opener = urllib2.build_opener()
-loop_flg = True
-while loop_flg == True:
+while True:
 	try:
 		soup = BeautifulSoup.BeautifulSoup(urllib2.urlopen(target_url.pop(0)).read())
 
