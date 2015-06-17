@@ -3,12 +3,13 @@ import sys
 from bs4 import BeautifulSoup
 import urllib2
 import re
+from datetime import datetime
 
 #BASE_URL = "http://plaza.rakuten.co.jp/"
 #IMAGE_URL = "http://image.space.rakuten.co.jp"
 
 argvs = sys.argv
-if len(argvs) == 2:
+if 2 <= len(argvs):
 	RAKUTEN_BLOG_NAME = argvs[1]
 else:
 	sys.exit()
@@ -50,17 +51,18 @@ class BlogList:
 			for st_link in st_block.find_all('a'):
 				li_data.append(st_link.get('href'))
 			for st_date in st_block.find_all('p',class_="loListTs"):
-				li_data.append(st_date.string)
+				dt_date = datetime.strptime(st_date.string, "%B %d, %Y")
+				li_data.append(dt_date.strftime("%Y-%m-%d"))
 			li_contents.append(li_data)
 		return li_contents
 
 blog_list = BlogList(RAKUTEN_BLOG_NAME)
-print blog_list.get_pager_link()
+blog_list.get_pager_link()
 
 st_link = blog_list.pop_pager_link()
 while st_link:
 	li_contents = blog_list.get_contents_data(st_link)
 
 	for i in li_contents:
-		print i[0].encode('utf-8') + "\t" + i[1].encode('utf-8') + "\t" + i[2].encode('utf-8')
+		print i[2].encode('utf-8') + "\t" + i[1].encode('utf-8') + "\t" + i[0].encode('utf-8')
 	st_link = blog_list.pop_pager_link()
