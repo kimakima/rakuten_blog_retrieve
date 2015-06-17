@@ -12,6 +12,6 @@ my first python script...
 
 - To get RakutenBlog Contents list
 
-> python rakuten_blog_list.py <blog_username> > filename.txt
+> $ python rakuten_blog_list.py blog_username > filename.txt
 
 
