@@ -9,10 +9,7 @@ my first python script...
 
 ## usage
 
-- create rakuten_blog_retreive.ini
-  latest blog URL
-> echo "/username/dairy/xxxxxxxxxx/ > rakuten_blog_retrieve.ini
-
-- python rakuten_blog_retreive.py
+- To get RakutenBlog Contents list
+> python rakuten_blog_list.py <blog_username> > filename.txt
 
 
