@@ -5,11 +5,13 @@ my first python script...
 ## ubuntu14
 
 > $ sudo aptitude install python-pip
+
 > $ sudo aptitude install python-beautifulsoup
 
 ## usage
 
 - To get RakutenBlog Contents list
+
 > python rakuten_blog_list.py <blog_username> > filename.txt
 
 
