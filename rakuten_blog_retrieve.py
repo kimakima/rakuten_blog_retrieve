@@ -3,6 +3,7 @@ import sys
 import BeautifulSoup
 import urllib2
 import re
+from datetime import datetime
 
 BASE_URL = "http://plaza.rakuten.co.jp/"
 IMAGE_URL = "http://image.space.rakuten.co.jp"
@@ -26,7 +27,9 @@ def get_title(soup):
 
 # datetime
 def get_datetime(soup):
-	return str(soup.find("div",align="right")).rsplit("\n")[2].strip()
+	st_date = str(soup.find("div",align="right")).rsplit("\n")[2].strip()
+	dt_date = datetime.strptime(st_date, "%B %d, %Y %I:%M:%S %p")
+	return dt_date.strftime("%Y-%m-%d %H:%m:%S")
 
 # content & strip html tags
 def get_content(soup):
@@ -63,7 +66,7 @@ while True:
 			print "link to images\t:" + i
 		st_link = get_past_link(soup)
 
-		print "link to past content\t:" + st_link
+#		print "link to past content\t:" + st_link
 	except:
 		print "except..."
 		sys.exit()
