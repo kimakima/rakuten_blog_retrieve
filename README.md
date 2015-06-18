@@ -14,4 +14,6 @@ my first python script...
 
 > $ python rakuten_blog_list.py blog_username > filename.txt
 
+- To get RakutenBlog Contents body
 
+> $ python rakuten_blog_retrieve.py filename.txt
