@@ -26,8 +26,9 @@ class BlogBody:
 		fh_link.close()
 		print str(self.target_url)
 
-	def retrieve_link_url(self):
-		self.soup = BeautifulSoup.BeautifulSoup(urllib2.urlopen(self.target_url.pop(0)).read())
+	def retrieve_content_body(self):
+		st_link_url = self.target_url.pop(0)
+		self.soup = BeautifulSoup.BeautifulSoup(urllib2.urlopen(st_link_url).read())
 	
 	# title
 	def get_title(self):
@@ -67,7 +68,7 @@ blog_body.read_link_file(st_link_filename)
 while True:
 	try:
 		print "----------"
-		blog_body.retrieve_link_url()
+		blog_body.retrieve_content_body()
 		print "title\t:" + blog_body.get_title()
 		print "datetime\t:" + blog_body.get_datetime()
 		print "content\t:\n" + blog_body.get_content()
