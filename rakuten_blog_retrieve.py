@@ -1,4 +1,5 @@
 #coding:utf-8
+import os
 import sys
 import BeautifulSoup
 import urllib2
@@ -17,6 +18,11 @@ else:
 class BlogBody:
 	def __init__(self):
 		self.target_url = []
+		self.st_link_url = ""
+		try:
+			os.mkdir("./img")
+		except:
+			pass
 		opener = urllib2.build_opener()
 
 	def read_link_file(self, st_link_filename):
@@ -27,8 +33,8 @@ class BlogBody:
 		print str(self.target_url)
 
 	def retrieve_content_body(self):
-		st_link_url = self.target_url.pop(0)
-		self.soup = BeautifulSoup.BeautifulSoup(urllib2.urlopen(st_link_url).read())
+		self.st_link_url = self.target_url.pop(0)
+		self.soup = BeautifulSoup.BeautifulSoup(urllib2.urlopen(self.st_link_url).read())
 	
 	# title
 	def get_title(self):
@@ -64,8 +70,9 @@ class BlogBody:
 
 	def get_image_file(self, st_image_url):
 		image_url = urllib2.urlopen(st_image_url)
+		st_image_filename_prefix = self.st_link_url.split("/")[-2]
 		st_image_filename = st_image_url.split("/")[-1]
-		image_file = open(st_image_filename,'wb')
+		image_file = open("img/" + st_image_filename_prefix + "_" + st_image_filename,'wb')
 		image_file.write(image_url.read())
 		image_url.close()
 		image_file.close()
