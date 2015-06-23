@@ -62,6 +62,14 @@ class BlogBody:
 #		print st_link_image['src']
 		return image_links
 
+	def get_image_file(self, st_image_url):
+		image_url = urllib2.urlopen(st_image_url)
+		st_image_filename = st_image_url.split("/")[-1]
+		image_file = open(st_image_filename,'wb')
+		image_file.write(image_url.read())
+		image_url.close()
+		image_file.close()
+
 blog_body = BlogBody()
 blog_body.read_link_file(st_link_filename)
 
@@ -74,6 +82,7 @@ while True:
 		print "content\t:\n" + blog_body.get_content()
 		for i in blog_body.get_link_image():
 			print "link to images\t:" + i
+			blog_body.get_image_file(i)
 		st_link = blog_body.get_past_link()
 
 #		print "link to past content\t:" + st_link
