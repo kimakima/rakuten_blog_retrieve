@@ -14,6 +14,8 @@ my first python script...
 
 > $ python rakuten_blog_list.py blog_username > contents_list.txt
 
+- edit contents_list.txt line for you want.
+
 ### To get RakutenBlog Contents body
 
 > $ python rakuten_blog_retrieve.py contents_list.txt

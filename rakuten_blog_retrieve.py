@@ -68,6 +68,7 @@ class BlogBody:
 #		print st_link_image['src']
 		return image_links
 
+	# save linked image file to ./img/
 	def get_image_file(self, st_image_url):
 		image_url = urllib2.urlopen(st_image_url)
 		st_image_filename_prefix = self.st_link_url.split("/")[-2]
